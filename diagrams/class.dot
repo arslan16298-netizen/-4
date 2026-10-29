@@ -1,0 +1,49 @@
+digraph classes {
+    rankdir=TB;
+    dpi=170;
+    nodesep=0.6;
+    ranksep=0.9;
+    node [fontname="DejaVu Sans", fontsize=13, shape=plaintext];
+    edge [fontname="DejaVu Sans", fontsize=12, color="#444444"];
+
+    SelfCheck [label=<
+    <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5" BGCOLOR="#f4f4f4" COLOR="#666666">
+      <TR><TD ALIGN="CENTER"><B>SelfCheck</B></TD></TR>
+      <HR/>
+      <TR><TD ALIGN="LEFT">- CSV_PATH: String</TD></TR>
+      <HR/>
+      <TR><TD ALIGN="LEFT">+ main(args: String[]): void</TD></TR>
+      <TR><TD ALIGN="LEFT">- unitChecks(): void</TD></TR>
+      <TR><TD ALIGN="LEFT">- dataDriven(): void</TD></TR>
+      <TR><TD ALIGN="LEFT">- checkRow(row: String): String</TD></TR>
+    </TABLE>>];
+
+    OrderCalculator [label=<
+    <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5" BGCOLOR="#e3f0ff" COLOR="#4a6fa5">
+      <TR><TD ALIGN="CENTER"><B>OrderCalculator</B></TD></TR>
+      <HR/>
+      <TR><TD ALIGN="LEFT">~ MIN_QUANTITY: int = 1</TD></TR>
+      <TR><TD ALIGN="LEFT">~ MAX_QUANTITY: int = 10000</TD></TR>
+      <TR><TD ALIGN="LEFT">~ MAX_UNIT_PRICE: double = 5000000</TD></TR>
+      <TR><TD ALIGN="LEFT">~ MIN_DISCOUNT: double = 0</TD></TR>
+      <TR><TD ALIGN="LEFT">~ MAX_DISCOUNT: double = 30</TD></TR>
+      <TR><TD ALIGN="LEFT"><B>~ VAT_RATE: double = 25</B>  // вариант 4</TD></TR>
+      <HR/>
+      <TR><TD ALIGN="LEFT">+ main(args: String[]): void</TD></TR>
+      <TR><TD ALIGN="LEFT">+ calculateBase(quantity: int, unitPrice: double): double</TD></TR>
+      <TR><TD ALIGN="LEFT">+ calculateDiscountAmount(base: double, discountPercent: double): double</TD></TR>
+      <TR><TD ALIGN="LEFT">+ applyDiscount(base: double, discountPercent: double): double</TD></TR>
+      <TR><TD ALIGN="LEFT">+ calculateVat(amountAfterDiscount: double, vatRate: double): double</TD></TR>
+      <TR><TD ALIGN="LEFT">+ calculateTotal(amountAfterDiscount: double, vat: double): double</TD></TR>
+      <TR><TD ALIGN="LEFT">+ isValid(quantity: int, unitPrice: double, discountPercent: double): boolean</TD></TR>
+      <TR><TD ALIGN="LEFT">+ validate(quantity: int, unitPrice: double, discountPercent: double): String</TD></TR>
+      <TR><TD ALIGN="LEFT">+ parseQuantity(text: String): int</TD></TR>
+      <TR><TD ALIGN="LEFT">+ parseAmount(text: String, field: String): double</TD></TR>
+      <TR><TD ALIGN="LEFT">- requireValue(text: String, field: String): String</TD></TR>
+      <TR><TD ALIGN="LEFT">- readValue(in: Scanner, prompt: String): String</TD></TR>
+      <TR><TD ALIGN="LEFT">- printMoney(label: String, amount: double): void</TD></TR>
+      <TR><TD ALIGN="LEFT">- format(value: double): String</TD></TR>
+    </TABLE>>];
+
+    SelfCheck -> OrderCalculator [label=" uses", style=dashed, arrowhead=open];
+}

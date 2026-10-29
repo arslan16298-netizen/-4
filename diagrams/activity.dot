@@ -1,0 +1,24 @@
+digraph activity {
+    rankdir=TB;
+    dpi=170;
+    nodesep=0.4;
+    ranksep=0.4;
+    node [fontname="DejaVu Sans", fontsize=13, style="rounded,filled", shape=box, fillcolor="#e3f0ff", color="#4a6fa5", margin="0.18,0.1"];
+    edge [fontname="DejaVu Sans", fontsize=12, color="#444444"];
+
+    start [label="Начало", shape=ellipse, fillcolor="#e0f2d8", color="#5a9a3c"];
+    in [label="Получить количество, цену и скидку (Scanner);\nставка НДС – константа VAT_RATE = 25 % (вариант 4)", shape=parallelogram, fillcolor="#e6e0f5", color="#7a64b0"];
+    a1 [label="A1: проверить формат и диапазоны\nколичество – целое, 1 ≤ q ≤ 10000\nцена – число, 0 < p ≤ 5 000 000\nскидка – число, 0 ≤ d ≤ 30"];
+    ok [label="Данные корректны?\n(validate == null)", shape=diamond, style=filled, fillcolor="#fff7c9", color="#b59a1e"];
+    base [label="base = quantity × unitPrice"];
+    a2 [label="A2: discount = base × d / 100\nafterDiscount = base − discount\nvat = afterDiscount × 25 / 100\ntotal = afterDiscount + vat"];
+    out [label="Вывести суммы в рублях\nс двумя знаками после запятой"];
+    err [label="Вывести причину ошибки,\nрасчёт не выполнять", fillcolor="#fde0e0", color="#c05050"];
+    end [label="Завершение", shape=ellipse, fillcolor="#ffe3cc", color="#d08040"];
+
+    start -> in -> a1 -> ok;
+    ok -> base [label=" да"];
+    ok -> err [label=" нет"];
+    base -> a2 -> out -> end;
+    err -> end;
+}
